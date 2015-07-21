@@ -1,6 +1,9 @@
 class UsersController < ApplicationController
   def create
-    @user = User.find_or_create_by(github_hash)
+    @user = User.find_by(:github_id => auth_hash.uid)
+    unless @user.present?
+      @user = User.create(github_hash)
+    end
     session[:email] = @user.email
     redirect_to root_path
   end
