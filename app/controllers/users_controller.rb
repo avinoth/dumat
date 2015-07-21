@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   def create
-    session[:email] = auth_hash.info["email"]
+    @user = User.find_or_create_by(github_hash)
+    session[:email] = @user.email
     redirect_to root_path
   end
 
@@ -12,6 +13,16 @@ class UsersController < ApplicationController
   private
   def auth_hash
     request.env['omniauth.auth']
+  end
+
+  def github_hash
+    {
+      :name => auth_hash.info["name"],
+      :github_username => auth_hash.info["nickname"],
+      :email => auth_hash.info["email"],
+      :token => auth_hash.credentials["token"],
+      :github_id => auth_hash.uid
+    }
   end
 
 end
