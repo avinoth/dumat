@@ -15,6 +15,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'omniauth'
 gem 'omniauth-github'
 
+gem 'friendly_id', '~> 5.1.0'
+
 group :development, :test do
   gem 'pry'
   gem 'web-console', '~> 2.0'

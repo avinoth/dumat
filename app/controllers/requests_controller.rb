@@ -7,7 +7,7 @@ class RequestsController < ApplicationController
   end
 
   def show
-    @request = Request.find(params[:id])
+    @request = Request.friendly.find(params[:id])
   end
 
   def new
@@ -53,7 +53,7 @@ class RequestsController < ApplicationController
 
   private
     def set_user_request
-      @request = @user.requests.find(params[:id])
+      @request = @current_user.requests.friendly.find(params[:id])
     end
 
     def request_params
