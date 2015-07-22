@@ -1,24 +1,24 @@
 class RequestsController < ApplicationController
-  before_action :set_request, only: [:show, :edit, :update, :destroy]
+  before_action :set_user_request, only: [:edit, :update, :destroy]
   before_action :require_login, except: [:index, :show]
-  before_action :set_user, except: [:index, :show]
 
   def index
     @requests = Request.all
   end
 
   def show
+    @request = Request.find(params[:id])
   end
 
   def new
-    @request = Request.new
+    @request = @current_user.requests.new
   end
 
   def edit
   end
 
   def create
-    @request = Request.new(request_params)
+    @request = @current_user.requests.new(request_params)
 
     respond_to do |format|
       if @request.save
@@ -52,8 +52,8 @@ class RequestsController < ApplicationController
   end
 
   private
-    def set_request
-      @request = Request.find(params[:id])
+    def set_user_request
+      @request = @user.requests.find(params[:id])
     end
 
     def request_params

@@ -8,4 +8,10 @@ class ApplicationController < ActionController::Base
   def set_current_user
     @current_user = User.find_by_email(session[:email])
   end
+
+  def require_login
+    unless session[:email]
+      redirect_to root_path
+    end
+  end
 end
