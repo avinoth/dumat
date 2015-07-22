@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :requests
   get '/home', to: 'static#home'
   get '/about', to: 'static#about'
 
