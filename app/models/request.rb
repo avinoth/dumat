@@ -4,4 +4,5 @@ class Request < ActiveRecord::Base
 
   belongs_to :user
   has_many :works
+  has_many :upvotes
 end
