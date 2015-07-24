@@ -3,7 +3,7 @@ class RequestsController < ApplicationController
   before_action :require_login, except: [:index, :show]
 
   def index
-    @requests = Request.all
+    @requests = Request.includes(:from_language).all
   end
 
   def show
