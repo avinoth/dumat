@@ -15,5 +15,15 @@
   <%= @request.description %>
 </p>
 
+<p>
+  <strong>From Language:</strong>
+  <%= @request.from_language.name %>
+</p>
+
+<p>
+  <strong>To Language:</strong>
+  <%= @request.to_language.name %>
+</p>
+
 <%= link_to 'Edit', edit_request_path(@request) %> |
 <%= link_to 'Back', requests_path %>

@@ -7,14 +7,16 @@ class RequestsController < ApplicationController
   end
 
   def show
-    @request = Request.friendly.find(params[:id])
+    @request = Request.includes(:from_language).friendly.find(params[:id])
   end
 
   def new
     @request = @current_user.requests.new
+    @languages = Language.all
   end
 
   def edit
+    @languages = Language.all
   end
 
   def create
@@ -57,6 +59,6 @@ class RequestsController < ApplicationController
     end
 
     def request_params
-      params.require(:request).permit(:name, :url, :description)
+      params.require(:request).permit(:name, :url, :description, :from_language_id, :to_language_id)
     end
 end

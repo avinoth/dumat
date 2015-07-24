@@ -23,6 +23,14 @@
     <%= f.label :description %><br>
     <%= f.text_area :description %>
   </div>
+  <div class="field">
+    <%= f.label :from_language %>
+    <%= f.select "from_language_id", options_for_select(@languages.collect{|c| [c.name, c.id]}, @languages) %>
+  </div>
+  <div class="field">
+    <%= f.label :to_language %>
+    <%= f.select "to_language_id", options_for_select(@languages.collect{|c| [c.name, c.id]}, @languages) %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>
