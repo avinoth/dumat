@@ -1,5 +1,5 @@
 <h3>Welcome <%= session[:email] || "You are Logged out" %> </h3>
-<% if @current_user.present? %>
+<% if user_logged_in? %>
 <p><%= link_to 'Logout', logout_path %></p>
 <% else %>
 <p><a href='/auth/github'>Login</a></p>

@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  resources :requests
+  resources :requests do
+    member do
+      get 'upvote'
+    end
+  end
+
   get '/home', to: 'static#home'
   get '/about', to: 'static#about'
 

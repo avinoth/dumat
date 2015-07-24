@@ -11,7 +11,7 @@ class RequestsController < ApplicationController
   end
 
   def new
-    @request = @current_user.requests.new
+    @request = current_user.requests.new
     @languages = Language.all
   end
 
@@ -20,7 +20,7 @@ class RequestsController < ApplicationController
   end
 
   def create
-    @request = @current_user.requests.new(request_params)
+    @request = current_user.requests.new(request_params)
 
     respond_to do |format|
       if @request.save
@@ -53,9 +53,14 @@ class RequestsController < ApplicationController
     end
   end
 
+  def upvote
+    current_user.upvotes.create(request_id: Request.friendly.find(params[:id]).id)
+    redirect_to requests_path
+  end
+
   private
     def set_user_request
-      @request = @current_user.requests.friendly.find(params[:id])
+      @request = current_user.requests.friendly.find(params[:id])
     end
 
     def request_params
