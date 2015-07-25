@@ -12,6 +12,6 @@ Rails.application.routes.draw do
   get 'auth/:provider/callback', to: 'users#create'
   get '/logout', to: 'users#logout', as: :logout
 
-  root to: 'static#home'
+  root to: 'requests#index'
 
 end
