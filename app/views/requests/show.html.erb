@@ -25,5 +25,13 @@
   <%= @request.to_language.name %>
 </p>
 
+<p>
+  <strong>Total upvotes</strong>
+  <%= @request.upvotes.count %>
+</p>
+
+<% if user_logged_in? %>
+  <td><%= link_to 'Upvote', upvote_request_path(@request)%></td> |
+<% end %>
 <%= link_to 'Edit', edit_request_path(@request) %> |
 <%= link_to 'Back', requests_path %>
