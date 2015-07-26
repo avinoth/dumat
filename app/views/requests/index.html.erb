@@ -1,16 +1,36 @@
 <p id="notice"><%= notice %></p>
 
 <div class="container-fluid">
-  <%= link_to 'New Request', new_request_path, class: 'btn btn-default pull-right' %>
-  <div class="col-md-6 col-md-offset-1">
-    <h3>Listing Requests</h3>
-    <% @requests.each do |req| %>
-      <div class="panel panel-default">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-1">
+      <div class="panel panel-primary">
         <div class="panel-body">
-          <h5><%= link_to req.name, req %></h5>
-          <%= req.description %>
+          <% @requests.each do |req| %>
+            <div class="panel panel-default">
+              <div class="panel-body">
+                <h5><%= link_to req.name, req %></h5>
+                <%= req.description %>
+              </div>
+            </div>
+          <% end %>
         </div>
       </div>
-    <% end %>
+    </div>
+
+    <div class="col-md-3">
+      <div class="panel">
+        <div class="panel-body">
+          <% if user_logged_in? %>
+            Howdy!
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-2">
+      <% if user_logged_in? %>
+        <%= link_to 'New Request', new_request_path, class: 'btn btn-default' %>
+      <% end %>
+    </div>
   </div>
 </div>
