@@ -11,6 +11,13 @@
                 <h5><%= link_to req.name, req %></h5>
                 <%= req.description %>
               </div>
+              <div class="panel-footer">
+                <%= req.from_language.name %> -> <%= req.to_language.name %>&nbsp; | &nbsp;
+                <%= req.upvotes.count %> people want this
+                <div class="pull-right">
+                  created by <%= req.user.github_username %> <%= time_ago_in_words req.created_at %> ago
+                </div>
+              </div>
             </div>
           <% end %>
         </div>
@@ -22,6 +29,22 @@
         <div class="panel-body">
           <% if user_logged_in? %>
             Howdy!
+          <% else %>
+            <p>
+            dumat is web tool where you can request for open source
+            library ports from one language to the other. Or can request
+            for a new library altogether.
+            </p>
+
+            <hr />
+            <b>How it Works:-</b>
+            <ol>
+              <li>You create a Request for a library port.</li>
+              <li>People who also wants a similar port upvotes it.</li>
+              <li>People who want to work on the port Volunteer it and start working.</li>
+            </ol>
+
+            Note: Many people can volunteer the same request.
           <% end %>
         </div>
       </div>
