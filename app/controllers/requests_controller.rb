@@ -4,6 +4,11 @@ class RequestsController < ApplicationController
 
   def index
     @requests = Request.includes(:from_language).all
+    if user_logged_in?
+      @upvoted_requests = current_user.upvotes.pluck(:request_id).compact.uniq
+    else
+      @upvoted_requests = nil
+    end
   end
 
   def show
@@ -54,7 +59,11 @@ class RequestsController < ApplicationController
   end
 
   def upvote
-    current_user.upvotes.create(request_id: Request.friendly.find(params[:id]).id)
+    if upvoted = current_user.upvotes.where(request_id: Request.friendly.find(params[:id]).id) and upvoted.present?
+      upvoted.destroy_all
+    else
+      current_user.upvotes.create(request_id: Request.friendly.find(params[:id]).id)
+    end
     redirect_to requests_path
   end
 

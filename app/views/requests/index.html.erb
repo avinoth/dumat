@@ -13,7 +13,12 @@
               </div>
               <div class="panel-footer">
                 <%= req.from_language.name %> -> <%= req.to_language.name %>&nbsp; | &nbsp;
-                <%= req.upvotes.count %> people want this
+                <%= req.upvotes.count %> people want this &nbsp; | &nbsp;
+                <% if @upvoted_requests.present? and @upvoted_requests.include? req.id %>
+                  <%= link_to "I don't want this", upvote_request_path(req) %>
+                <% else %>
+                  <%= link_to "I too want this", upvote_request_path(req) %>
+                <% end %>
                 <div class="pull-right">
                   created by <%= req.user.github_username %> <%= time_ago_in_words req.created_at %> ago
                 </div>
