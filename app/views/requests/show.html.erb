@@ -1,3 +1,4 @@
+<% upvote_msg = @request.upvoted_by?(current_user) ? "I don't want this" : "I too want this" %>
 <div class="container-fluid">
   <p id="notice"><%= notice %></p>
   <div class="row">
@@ -16,11 +17,7 @@
         <div class="panel-footer">
           <%= @request.upvotes.count %> people want this
           &nbsp; | &nbsp;
-          <% if user_logged_in? and @request.upvoted_by? current_user %>
-            <%= link_to "I don't want this", upvote_request_path(@request) %>
-          <% else %>
-            <%= link_to "I too want this", upvote_request_path(@request) %>
-          <% end %>
+            <%= link_to upvote_msg, upvote_request_path(@request), data: {allow: user_logged_in?}, class: 'upvote-btn' %>
           <div class="pull-right">
             <%= link_to 'Edit', edit_request_path(@request) %> |
             <%= link_to 'Back', requests_path %>

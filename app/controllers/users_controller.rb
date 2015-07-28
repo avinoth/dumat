@@ -5,12 +5,17 @@ class UsersController < ApplicationController
       @user = User.create(github_hash)
     end
     session[:email] = @user.email
-    redirect_to root_path
+    redirect_to session[:redirect_url]
   end
 
   def logout
     reset_session
     redirect_to root_path
+  end
+
+  def login
+    session[:redirect_url] = params[:redirec_uri] || root_path
+    redirect_to '/auth/github'
   end
 
   private

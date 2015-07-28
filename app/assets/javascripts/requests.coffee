@@ -1,3 +1,9 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+$ ->
+  $('.upvote-btn').click (e) ->
+    e.preventDefault()
+    current_path = window.location.pathname
+    url = $(this).attr('href')
+    allowed = $(this).data('allow')
+
+    if allowed
+      $.get url
