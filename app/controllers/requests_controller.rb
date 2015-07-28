@@ -59,12 +59,15 @@ class RequestsController < ApplicationController
   end
 
   def upvote
+    @request = Request.friendly.find(params[:id])
     if upvoted = current_user.upvotes.where(request_id: Request.friendly.find(params[:id]).id) and upvoted.present?
       upvoted.destroy_all
+      status_msg = "I too want this"
     else
       current_user.upvotes.create(request_id: Request.friendly.find(params[:id]).id)
+      status_msg = "I don't want this"
     end
-    redirect_to requests_path
+    render json: {status: status_msg, upvotes: @request.upvotes.count}
   end
 
   private
