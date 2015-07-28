@@ -26,7 +26,7 @@
           <li><a><%= current_user.name %></a></li>
           <li><%= link_to 'Logout', logout_path %></li>
         <% else %>
-          <li><%= link_to 'Login', login_path %></li>
+          <li><%= link_to 'Login', login_path, data:{href: login_path}, class: 'login-btn' %></li>
         <% end %>
       </ul>
     </div>

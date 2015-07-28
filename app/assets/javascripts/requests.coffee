@@ -2,7 +2,6 @@ $ ->
   $('.upvote-btn').click (e) ->
     e.preventDefault()
     el = $(this)
-    current_path = window.location.pathname
     url = $(this).attr('href')
     allowed = $(this).data('allow')
 
@@ -11,3 +10,5 @@ $ ->
         $('#upvotes-count').text(xhr.upvotes)
         el.text(xhr.status)
         )
+    else
+      $('#login-modal').modal()

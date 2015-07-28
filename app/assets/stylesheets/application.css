@@ -12,9 +12,14 @@
  *
  *= require_tree .
  *= require_self
+ *= require font-awesome
  *= require bootstrap.min
  */
 
 body {
   background-color: #F5F5F5 !important;
+}
+
+.act-link {
+  cursor:pointer;
 }

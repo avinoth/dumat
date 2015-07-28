@@ -14,7 +14,7 @@ class UsersController < ApplicationController
   end
 
   def login
-    session[:redirect_url] = params[:redirec_uri] || root_path
+    session[:redirect_url] = params[:redirect_uri] || root_path
     redirect_to '/auth/github'
   end
 
