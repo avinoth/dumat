@@ -4,17 +4,23 @@
     <div class="col-md-6 col-md-offset-3">
       <div class="panel panel-default">
         <div class="panel-heading">
-          <div class="panel-title"><%= @request.name %> - <%= @request.url %></div>
+          <div class="panel-title"><%= @request.name %>
+          <div class="pull-right"><%= @request.from_language.name %> To <%= @request.to_language.name %></div>
+          </div>
         </div>
         <div class="panel-body">
+          <p>Project URL - <%= @request.url %></p>
+          <hr />
           <%= @request.description %>
-          <br /><br />
-          <%= @request.from_language.name %> To <%= @request.to_language.name %>
         </div>
         <div class="panel-footer">
-          <% if user_logged_in? %>
-            <%= link_to 'Upvote', upvote_request_path(@request)%>
-          <% end %>(<%= @request.upvotes.count %>)
+          <%= @request.upvotes.count %> people want this
+          &nbsp; | &nbsp;
+          <% if user_logged_in? and @request.upvoted_by? current_user %>
+            <%= link_to "I don't want this", upvote_request_path(@request) %>
+          <% else %>
+            <%= link_to "I too want this", upvote_request_path(@request) %>
+          <% end %>
           <div class="pull-right">
             <%= link_to 'Edit', edit_request_path(@request) %> |
             <%= link_to 'Back', requests_path %>

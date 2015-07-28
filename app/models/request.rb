@@ -14,4 +14,7 @@ class Request < ActiveRecord::Base
     where("#{direction} = ?", language_id)
   end
 
+  def upvoted_by? user
+    upvotes.find_by(user_id: user).present?
+  end
 end
