@@ -14,7 +14,7 @@
               <div class="panel-footer">
                 <%= req.from_language.name %> -> <%= req.to_language.name %>&nbsp; | &nbsp;
                 <%= req.upvotes.count %> people want this &nbsp; | &nbsp;
-                <% if @upvoted_requests.present? and @upvoted_requests.include? req.id %>
+                <% if @upvoted_requests.present? and @upvoted_requests.include? req %>
                   <%= link_to "I don't want this", upvote_request_path(req), class: 'link upvote-btn' %>
                 <% else %>
                   <%= link_to "I too want this", upvote_request_path(req), class: 'link upvote-btn' %>
@@ -33,7 +33,12 @@
       <div class="panel">
         <div class="panel-body">
           <% if user_logged_in? %>
-            Howdy!
+            <p><i>Projects you are interested in..</i></p>
+            <% @upvoted_requests.each do |ureq| %>
+              <p>
+              <%= link_to ureq.name, ureq, class: 'link' %> - from <%= ureq.from_language.name %> to
+              <%= ureq.to_language.name %></p>
+            <% end %>
           <% else %>
             <p>
             dumat is web tool where you can request for open source

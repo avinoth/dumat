@@ -5,14 +5,15 @@ class RequestsController < ApplicationController
   def index
     @requests = Request.includes(:from_language).all
     if user_logged_in?
-      @upvoted_requests = current_user.upvotes.pluck(:request_id).compact.uniq
+      @upvoted_requests = current_user.upvotes.collect(&:request).compact.uniq
     else
       @upvoted_requests = nil
     end
   end
 
   def show
-    @request = Request.includes(:from_language).friendly.find(params[:id])
+    @request = Request.includes(:from_language, upvotes: :user).friendly.find(params[:id])
+    @people_interested = @request.upvotes.collect(&:user)
   end
 
   def new

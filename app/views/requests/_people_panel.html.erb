@@ -1,0 +1,7 @@
+<p><i>people who are also interested in this..</i></p>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <%= @people_interested.collect(&:slug).join(', ') %>
+  </div>
+</div>
+

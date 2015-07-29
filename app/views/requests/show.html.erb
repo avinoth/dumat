@@ -19,11 +19,14 @@
           &nbsp; | &nbsp;
             <%= link_to upvote_msg, upvote_request_path(@request), data: {allow: user_logged_in?}, class: 'upvote-btn link' %>
           <div class="pull-right">
-            <%= link_to 'Edit', edit_request_path(@request), class: 'link' %> |
-            <%= link_to 'Back', requests_path, class: 'link' %>
+            <a href=<%= edit_request_path(@request) %> class='link'><i class="fa fa-pencil"></i></a>&nbsp; | &nbsp;
+            <%= link_to ('<i class="fa fa-trash-o"></i>').html_safe,  @request,  method: :delete, data: { confirm: 'Are you sure?' }, class: 'link' %>
           </div>
         </div>
       </div>
+      <% if @people_interested.present? %>
+        <%= render 'people_panel' %>
+      <% end %>
     </div>
   </div>
 </div>
