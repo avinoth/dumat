@@ -8,16 +8,16 @@
           <% @requests.each do |req| %>
             <div class="panel panel-default">
               <div class="panel-body">
-                <h5><%= link_to req.name, req %></h5>
+                <h5><%= link_to req.name, req, class: 'link' %></h5>
                 <%= req.description %>
               </div>
               <div class="panel-footer">
                 <%= req.from_language.name %> -> <%= req.to_language.name %>&nbsp; | &nbsp;
                 <%= req.upvotes.count %> people want this &nbsp; | &nbsp;
                 <% if @upvoted_requests.present? and @upvoted_requests.include? req.id %>
-                  <%= link_to "I don't want this", upvote_request_path(req) %>
+                  <%= link_to "I don't want this", upvote_request_path(req), class: 'link upvote-btn' %>
                 <% else %>
-                  <%= link_to "I too want this", upvote_request_path(req) %>
+                  <%= link_to "I too want this", upvote_request_path(req), class: 'link upvote-btn' %>
                 <% end %>
                 <div class="pull-right">
 
