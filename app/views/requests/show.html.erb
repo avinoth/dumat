@@ -15,7 +15,7 @@
           <%= @request.description %>
         </div>
         <div class="panel-footer">
-          <span id="upvotes-count"><%= @request.upvotes.count %></span> people want this
+          <span class="upvotes-count"><%= @request.upvotes.count %></span> people want this
           &nbsp; | &nbsp;
             <%= link_to upvote_msg, upvote_request_path(@request), data: {allow: user_logged_in?}, class: 'upvote-btn link' %>
           <div class="pull-right">

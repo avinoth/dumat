@@ -13,11 +13,11 @@
               </div>
               <div class="panel-footer">
                 <%= req.from_language.name %> -> <%= req.to_language.name %>&nbsp; | &nbsp;
-                <%= req.upvotes.count %> people want this &nbsp; | &nbsp;
+                <span class="upvotes-count"><%= req.upvotes.count %></span> people want this &nbsp; | &nbsp;
                 <% if @upvoted_requests.present? and @upvoted_requests.include? req %>
-                  <%= link_to "I don't want this", upvote_request_path(req), class: 'link upvote-btn' %>
+                  <%= link_to "I don't want this", upvote_request_path(req), data: {allow: user_logged_in?}, class: 'link upvote-btn' %>
                 <% else %>
-                  <%= link_to "I too want this", upvote_request_path(req), class: 'link upvote-btn' %>
+                  <%= link_to "I too want this", upvote_request_path(req), data: {allow: user_logged_in?}, class: 'link upvote-btn' %>
                 <% end %>
                 <div class="pull-right">
 

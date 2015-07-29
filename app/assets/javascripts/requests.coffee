@@ -7,7 +7,7 @@ $ ->
 
     if allowed
       $.ajax(url).done( (xhr, statusText) ->
-        $('#upvotes-count').text(xhr.upvotes)
+        el.parents('.panel-footer').find('.upvotes-count').text(xhr.upvotes)
         el.text(xhr.status)
         )
     else
