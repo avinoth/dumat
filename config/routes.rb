@@ -5,6 +5,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :users, only: [:index, :show]
+
   get '/home', to: 'static#home'
   get '/about', to: 'static#about'
 
