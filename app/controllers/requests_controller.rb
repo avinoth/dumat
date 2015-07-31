@@ -7,7 +7,14 @@ class RequestsController < ApplicationController
     @requests = Request.includes(:from_language)
     @requests = @requests.where(from_language: @options[:from]) if @options[:from].present?
     @requests = @requests.where(to_language: @options[:to]) if @options[:to].present?
-    @requests = @requests.where(user: @options[:by]) if @options[:by].present?
+    if @options[:by].present?
+      user = User.friendly.find(@options[:by])
+      @requests = @requests.where(user: user)
+    end
+    if @options[:interested].present?
+      user = User.friendly.find(@options[:interested])
+      @requests = @requests.interested_by user.id
+    end
     if user_logged_in?
       @upvoted_requests = current_user.upvotes.collect(&:request).compact.uniq
     else
