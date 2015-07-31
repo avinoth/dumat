@@ -12,7 +12,8 @@
                 <%= req.description %>
               </div>
               <div class="panel-footer">
-                <%= req.from_language.name %> -> <%= req.to_language.name %>&nbsp; | &nbsp;
+                <%= link_to req.from_language.name, requests_path(@options.merge("from" => req.from_language)), class: 'link' %> ->
+                <%= link_to req.to_language.name, requests_path(@options.merge("to" => req.to_language)), class: 'link' %>&nbsp; | &nbsp;
                 <span class="upvotes-count"><%= req.upvotes.count %></span> people want this &nbsp; | &nbsp;
                 <% if @upvoted_requests.present? and @upvoted_requests.include? req %>
                   <%= link_to "I don't want this", upvote_request_path(req), data: {allow: user_logged_in?}, class: 'link upvote-btn' %>

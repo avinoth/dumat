@@ -3,7 +3,11 @@ class RequestsController < ApplicationController
   before_action :require_login, except: [:index, :show]
 
   def index
-    @requests = Request.includes(:from_language).all
+    @options = allow_options [:from, :to, :by, :interested]
+    @requests = Request.includes(:from_language)
+    @requests = @requests.where(from_language: @options[:from]) if @options[:from].present?
+    @requests = @requests.where(to_language: @options[:to]) if @options[:to].present?
+    @requests = @requests.where(user: @options[:by]) if @options[:by].present?
     if user_logged_in?
       @upvoted_requests = current_user.upvotes.collect(&:request).compact.uniq
     else
@@ -78,5 +82,9 @@ class RequestsController < ApplicationController
 
     def request_params
       params.require(:request).permit(:name, :url, :description, :from_language_id, :to_language_id)
+    end
+
+    def allow_options opts
+      params.permit opts
     end
 end
