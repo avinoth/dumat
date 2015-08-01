@@ -21,7 +21,7 @@
                   <%= link_to "I too want this", upvote_request_path(req), data: {allow: user_logged_in?}, class: 'link upvote-btn' %>
                 <% end %>
                 <div class="pull-right">
-                  <i>by <%= link_to req.user.slug, requests_path(@options.merge({"by" => req.user.slug})), class: 'link' %></i>
+                  <i>by <%= link_to req.user.slug, req.user, class: 'link' %></i>
                 </div>
               </div>
             </div>
