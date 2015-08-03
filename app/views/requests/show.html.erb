@@ -1,8 +1,8 @@
 <% upvote_msg = @request.upvoted_by?(current_user) ? "I don't want this" : "I too want this" %>
 <div class="container-fluid">
-  <p id="notice"><%= notice %></p>
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
+      <p id="notice"><%= notice %></p>
       <div class="panel panel-default">
         <div class="panel-heading">
           <div class="panel-title"><%= @request.name %>
@@ -21,10 +21,12 @@
           <span class="upvotes-count"><%= @request.upvotes.count %></span> people want this
           &nbsp; | &nbsp;
             <%= link_to upvote_msg, upvote_request_path(@request), data: {allow: user_logged_in?}, class: 'upvote-btn link' %>
-          <div class="pull-right">
-            <a href=<%= edit_request_path(@request) %> class='link'><i class="fa fa-pencil"></i></a>&nbsp; | &nbsp;
-            <%= link_to ('<i class="fa fa-trash-o"></i>').html_safe,  @request,  method: :delete, data: { confirm: 'Are you sure?' }, class: 'link' %>
-          </div>
+          <% if user_logged_in? and @request.user == current_user %>
+            <div class="pull-right">
+              <a href=<%= edit_request_path(@request) %> class='link'><i class="fa fa-pencil"></i></a>&nbsp; | &nbsp;
+              <%= link_to ('<i class="fa fa-trash-o"></i>').html_safe,  @request,  method: :delete, data: { confirm: 'Are you sure?' }, class: 'link' %>
+            </div>
+          <% end %>
         </div>
       </div>
       <% if @people_interested.present? %>
