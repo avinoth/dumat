@@ -1,9 +1,5 @@
-<p><i>people who are also interested in this..</i></p>
-<div class="panel panel-default">
-  <div class="panel-body">
-    <% @people_interested.each do |people| %>
-      <%= link_to people.slug, people, class: 'link' %>
+<p><i><%= @request.upvotes.count %> people are also interested in this..</i></p>
+    <% @request.upvotes.each do |upvote| %>
+      <i><%= link_to upvote.user.slug, upvote.user, class: 'link' %> showed interest on this <%= time_ago_in_words upvote.updated_at %> ago.</i><br />
     <% end %>
-  </div>
-</div>
 

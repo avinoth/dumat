@@ -27,7 +27,7 @@
           <% end %>
         </div>
       </div>
-      <% if @people_interested.present? %>
+      <% if @request.upvotes.count > 0 %>
         <%= render 'people_panel' %>
       <% end %>
     </div>

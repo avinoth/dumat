@@ -24,7 +24,6 @@ class RequestsController < ApplicationController
 
   def show
     @request = Request.includes(:from_language, upvotes: :user).friendly.find(params[:id])
-    @people_interested = @request.upvotes.collect(&:user)
   end
 
   def new
