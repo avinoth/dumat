@@ -6,10 +6,8 @@
       <div class="panel panel-default">
         <div class="panel-heading">
           <div class="panel-title"><%= @request.name %>
-          <div class="pull-right">
-            <%= link_to @request.from_language.name, requests_path({"from" => @request.from_language}), class: 'link' %> To
-            <%= link_to @request.to_language.name, requests_path({"to" => @request.to_language}), class: 'link' %>
-          </div>
+          <div class="pull-right"><%= link_to @request.from_language.name, requests_path({"from" => @request.from_language}), class: 'link' %> To
+          <%= link_to @request.to_language.name, requests_path({"to" => @request.to_language}), class: 'link' %></div>
           </div>
         </div>
         <div class="panel-body">
