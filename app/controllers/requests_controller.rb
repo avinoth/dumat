@@ -24,6 +24,7 @@ class RequestsController < ApplicationController
 
   def show
     @request = Request.includes(:from_language, upvotes: :user).friendly.find(params[:id])
+    @owner = @request.user
   end
 
   def new

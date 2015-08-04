@@ -1,4 +1,4 @@
-<% upvotes = @request.upvotes.reject{|u| u.user == @request.user } %>
+<% upvotes = @request.upvotes.reject{|u| u.user == @owner } %>
 <% if upvotes.present? %>
   <p><i><%= upvotes.count %> people are also interested in this..</i></p>
   <% upvotes.each do |upvote| %>
@@ -6,5 +6,5 @@
   <% end %>
 <% end %>
 <hr />
-<i><%= link_to @request.user.slug, @request.user, class: 'link' %> requested this <%= time_ago_in_words @request.created_at %> ago.</i>
+<i><%= link_to @owner.slug, @owner, class: 'link' %> requested this <%= time_ago_in_words @request.created_at %> ago.</i>
 

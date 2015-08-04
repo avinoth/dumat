@@ -17,9 +17,12 @@
         </div>
         <div class="panel-footer">
           <span class="upvotes-count"><%= @request.upvotes.count %></span> people want this
-          &nbsp; | &nbsp;
-            <%= link_to upvote_msg, upvote_request_path(@request), data: {allow: user_logged_in?}, class: 'upvote-btn link' %>
-          <% if user_logged_in? and @request.user == current_user %>
+          &nbsp;
+          <% unless is_owner? @request %>
+            | &nbsp;
+              <%= link_to upvote_msg, upvote_request_path(@request), data: {allow: user_logged_in?}, class: 'upvote-btn link' %>
+          <% end %>
+          <% if user_logged_in? and @owner == current_user %>
             <div class="pull-right">
               <a href=<%= edit_request_path(@request) %> class='link'><i class="fa fa-pencil"></i></a>&nbsp; | &nbsp;
               <%= link_to ('<i class="fa fa-trash-o"></i>').html_safe,  @request,  method: :delete, data: { confirm: 'Are you sure?' }, class: 'link' %>

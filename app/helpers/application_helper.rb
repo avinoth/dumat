@@ -7,4 +7,9 @@ module ApplicationHelper
     session[:email].present?
   end
 
+  def is_owner? req
+    if user_logged_in?
+      req.user == current_user
+    end
+  end
 end
