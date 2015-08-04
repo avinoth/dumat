@@ -40,6 +40,7 @@ class RequestsController < ApplicationController
 
     respond_to do |format|
       if @request.save
+        @request.upvotes.create(user: current_user)
         format.html { redirect_to @request, notice: 'Request was successfully created.' }
         format.json { render :show, status: :created, location: @request }
       else

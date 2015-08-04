@@ -34,11 +34,15 @@
       <div class="panel">
         <div class="panel-body">
           <% if user_logged_in? %>
-            <p><i>Projects you are interested in..</i></p>
-            <% @upvoted_requests.each do |ureq| %>
-              <p>
-              <%= link_to ureq.name, ureq, class: 'link' %> - from <%= ureq.from_language.name %> to
-              <%= ureq.to_language.name %></p>
+            <% if @upvoted_requests.count > 0 %>
+              <p><i>Projects you are interested in..</i></p>
+              <% @upvoted_requests.each do |ureq| %>
+                <p>
+                <%= link_to ureq.name, ureq, class: 'link' %> - from <%= ureq.from_language.name %> to
+                <%= ureq.to_language.name %></p>
+              <% end %>
+            <% else %>
+              <p>When you show interest in some project, it will show here</p>
             <% end %>
           <% else %>
             <p>
@@ -52,10 +56,7 @@
             <ol>
               <li>You create a Request for a library port.</li>
               <li>People who also wants a similar port upvotes it.</li>
-              <li>People who want to work on the port Volunteer it and start working.</li>
             </ol>
-
-            Note: Many people can volunteer the same request.
           <% end %>
         </div>
       </div>
