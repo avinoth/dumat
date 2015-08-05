@@ -7,7 +7,8 @@
           <span class="pull-right"><i>joined on <%= @user.created_at.to_date %></i></span></h3>
         </div>
         <div class="panel-body">
-          <%= @user.slug %> is interested in <%= link_to "#{@user.upvotes.count} port requests", requests_path({"interested" => @user}), class: 'link' %>.
+          <%= @user.slug %> has <%= link_to "#{@user.requests.count} requests", requests_path({"by" => @user}, class: 'link') %>
+          and interested in other <%= link_to "#{@user.upvotes.count - @user.requests.count} requests", requests_path({"interested" => @user}), class: 'link' %>.
         </div>
       </div>
     </div>
