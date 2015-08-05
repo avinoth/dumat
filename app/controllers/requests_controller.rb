@@ -5,8 +5,8 @@ class RequestsController < ApplicationController
   def index
     @options = allow_options [:from, :to, :by, :interested]
     @requests = Request.includes(:from_language)
-    @requests = @requests.where(from_language: @options[:from]) if @options[:from].present?
-    @requests = @requests.where(to_language: @options[:to]) if @options[:to].present?
+    @requests = @requests.where(from_language: find_language(@options[:from])) if @options[:from].present?
+    @requests = @requests.where(to_language: find_language(@options[:to])) if @options[:to].present?
     if @options[:by].present?
       user = User.friendly.find(@options[:by])
       @requests = @requests.where(user: user)
@@ -94,5 +94,9 @@ class RequestsController < ApplicationController
 
     def allow_options opts
       params.permit opts
+    end
+
+    def find_language lang
+      Language.friendly.find(lang)
     end
 end

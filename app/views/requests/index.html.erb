@@ -2,8 +2,11 @@
   <div class="row">
     <div class="col-md-6 col-md-offset-1">
       <p id="notice"><%= notice %></p>
-
-      <div class="panel panel-primary">
+      <% unless @options.empty? %>
+        <%= link_to "Clear Filters", requests_path, class: 'btn btn-warning' %><br /><br />
+        <%= filter_message(@options).html_safe %>
+      <% end %>
+      <div class="panel panel-default" style="margin-top: 20px;">
         <div class="panel-body">
           <% @requests.each do |req| %>
             <div class="panel panel-default">
@@ -12,8 +15,8 @@
                 <%= req.description %>
               </div>
               <div class="panel-footer">
-                <%= link_to req.from_language.name, requests_path(@options.merge("from" => req.from_language)), class: 'link' %> ->
-                <%= link_to req.to_language.name, requests_path(@options.merge("to" => req.to_language)), class: 'link' %>&nbsp; | &nbsp;
+                <%= link_to req.from_language.name, requests_path(@options.merge("from" => req.from_language.slug)), class: 'link' %> ->
+                <%= link_to req.to_language.name, requests_path(@options.merge("to" => req.to_language.slug)), class: 'link' %>&nbsp; | &nbsp;
                 <span class="upvotes-count"><%= req.upvotes.count %></span> people want this &nbsp;
                 <% unless is_owner? req %>
                    | &nbsp;
@@ -24,7 +27,8 @@
                   <% end %>
                 <% end %>
                 <div class="pull-right">
-                  <i>by <%= link_to req.user.slug, req.user, class: 'link' %></i>
+                  <i><%= link_to req.user.slug, requests_path(@options.merge("by" => req.user.slug)), class: 'link' %></i>&nbsp;
+                  <i><a href=<%= user_path req.user %> class='link'><i class="fa fa-user"></i></a></i>
                 </div>
               </div>
             </div>
