@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: [:index, :show]
+  resources :languages, only: [:index]
 
   get '/home', to: 'static#home'
   get '/about', to: 'static#about'
