@@ -17,8 +17,8 @@
     <br />
     <%= f.text_area :description, placeholder: "Give a short description why the port or about the library", class: 'form-control', required: true %>
     <br />
-    <%= f.select "from_language_id", options_for_select(@languages.collect{|c| [c.name, c.id]}, @languages), class: 'form-control', required: true %>&nbsp;
-    To: <%= f.select "to_language_id", options_for_select(@languages.collect{|c| [c.name, c.id]}, @languages), class: 'form-control', required: true%>
+    <%= f.text_field :from_language_id, class: 'language-selection', required: true, hidden: true, 'data-placeholder' => 'Select From Language' %>&nbsp;
+    To &nbsp;<%= f.text_field "to_language_id", class: 'language-selection', required: true, hidden: true, 'data-placeholder' => 'Select To Language' %>
     <br /><br />
     <%= f.submit class: "btn btn-primary" %>&nbsp;&nbsp;<%= link_to 'Cancel', requests_path, class: 'btn btn-default' %>
 <% end %>

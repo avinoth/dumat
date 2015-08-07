@@ -12,4 +12,11 @@ class Language < ActiveRecord::Base
   def request_to
     Request.by_language(self.id, 'to')
   end
+
+  def self.search q
+    results = where('slug LIKE ?', "#{q}_%")
+    if results
+      results.map { |result| {id: result.id, text: result.name} }
+    end
+  end
 end

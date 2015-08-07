@@ -12,3 +12,12 @@ $ ->
         )
     else
       $('#login-modal').modal()
+
+
+  $('.language-selection').select2
+    minimumInputLength: 1
+    ajax:
+      url: "/languages"
+      dataType: 'json'
+      data: (term, page) -> return { q: term }
+      results: (data, page) -> {results: data}
