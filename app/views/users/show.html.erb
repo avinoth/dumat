@@ -1,3 +1,4 @@
+<% user_upvoted = @user.upvotes.count - @user.requests.count %>
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
@@ -8,7 +9,9 @@
         </div>
         <div class="panel-body">
           <%= @user.slug %> has <%= link_to "#{@user.requests.count} requests", requests_path({"by" => @user}, class: 'link') %>
-          and interested in other <%= link_to "#{@user.upvotes.count - @user.requests.count} requests", requests_path({"interested" => @user}), class: 'link' %>.
+          <% if user_upvoted > 1 %>
+            and interested in other <%= link_to "#{user_upvoted} requests", requests_path({"interested" => @user}), class: 'link' %>.
+          <% end %>
         </div>
       </div>
     </div>

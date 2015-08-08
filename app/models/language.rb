@@ -14,7 +14,7 @@ class Language < ActiveRecord::Base
   end
 
   def self.search q
-    results = where('slug LIKE ?', "#{q}_%")
+    results = where('slug LIKE ? OR slug LIKE ?', q.downcase, "#{q.downcase}_%")
     if results
       results.map { |result| {id: result.id, text: result.name} }
     end
