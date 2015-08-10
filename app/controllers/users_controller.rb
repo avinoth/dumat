@@ -18,10 +18,6 @@ class UsersController < ApplicationController
     redirect_to '/auth/github'
   end
 
-  def show
-    @user = User.includes(:requests, :upvotes).friendly.find(params[:id])
-  end
-
   private
   def auth_hash
     request.env['omniauth.auth']

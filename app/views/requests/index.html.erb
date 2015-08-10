@@ -28,7 +28,6 @@
                 <% end %>
                 <div class="pull-right">
                   <i><%= link_to req.user.slug, requests_path(@options.merge("by" => req.user.slug)), class: 'link' %></i>&nbsp;
-                  <i><a href=<%= user_path req.user %> class='link'><i class="fa fa-user"></i></a></i>
                 </div>
               </div>
             </div>
@@ -63,6 +62,8 @@
             <ol>
               <li>You create a Request for a library port.</li>
               <li>People who also wants a similar port upvotes it.</li>
+              <br /><i>Upcoming</i><br /><br />
+              <li>People who wish to port can assign and work on it.</li>
             </ol>
           <% end %>
         </div>

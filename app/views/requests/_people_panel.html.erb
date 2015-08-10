@@ -2,9 +2,9 @@
 <% if upvotes.present? %>
   <p><i><%= upvotes.count %> people are also interested in this..</i></p>
   <% upvotes.each do |upvote| %>
-    <i><%= link_to upvote.user.slug, upvote.user, class: 'link' %> showed interest on this <%= time_ago_in_words upvote.updated_at %> ago.</i><br />
+    <i><%= link_to upvote.user.slug, requests_path({"interested" => upvote.user}), class: 'link' %> showed interest on this <%= time_ago_in_words upvote.updated_at %> ago.</i><br />
   <% end %>
 <% end %>
 <hr />
-<i><%= link_to @owner.slug, @owner, class: 'link' %> requested this <%= time_ago_in_words @request.created_at %> ago.</i>
+<i><%= link_to @owner.slug, requests_path({"by" => @owner}), class: 'link' %> requested this <%= time_ago_in_words @request.created_at %> ago.</i>
 
